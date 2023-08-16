@@ -102,7 +102,7 @@ PicaFSConfig::PicaFSConfig(const Pica::Regs& regs, const Instance& instance) {
 
     // Fragment lighting
     state.lighting.enable.Assign(!regs.lighting.disable);
-    if(state.lighting.enable) {
+    if (state.lighting.enable) {
         state.lighting.src_num.Assign(regs.lighting.max_light_index + 1);
 
         for (u32 light_index = 0; light_index < state.lighting.src_num; ++light_index) {
@@ -110,8 +110,8 @@ PicaFSConfig::PicaFSConfig(const Pica::Regs& regs, const Instance& instance) {
             const auto& light = regs.lighting.light[num];
             state.lighting.light[light_index].num.Assign(num);
             state.lighting.light[light_index].directional.Assign(light.config.directional != 0);
-            state.lighting.light[light_index].two_sided_diffuse.Assign(light.config.two_sided_diffuse !=
-                                                                    0);
+            state.lighting.light[light_index].two_sided_diffuse.Assign(
+                light.config.two_sided_diffuse != 0);
             state.lighting.light[light_index].geometric_factor_0.Assign(
                 light.config.geometric_factor_0 != 0);
             state.lighting.light[light_index].geometric_factor_1.Assign(
@@ -125,17 +125,19 @@ PicaFSConfig::PicaFSConfig(const Pica::Regs& regs, const Instance& instance) {
         }
 
         state.lighting.lut_d0.enable.Assign(regs.lighting.config1.disable_lut_d0 == 0);
-        if(state.lighting.lut_d0.enable) {
+        if (state.lighting.lut_d0.enable) {
             state.lighting.lut_d0.abs_input.Assign(regs.lighting.abs_lut_input.disable_d0 == 0);
             state.lighting.lut_d0.type.Assign(regs.lighting.lut_input.d0.Value());
-            state.lighting.lut_d0.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.d0);
+            state.lighting.lut_d0.scale =
+                regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.d0);
         }
 
         state.lighting.lut_d1.enable.Assign(regs.lighting.config1.disable_lut_d1 == 0);
-        if(state.lighting.lut_d1.enable) {
+        if (state.lighting.lut_d1.enable) {
             state.lighting.lut_d1.abs_input.Assign(regs.lighting.abs_lut_input.disable_d1 == 0);
             state.lighting.lut_d1.type.Assign(regs.lighting.lut_input.d1.Value());
-            state.lighting.lut_d1.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.d1);
+            state.lighting.lut_d1.scale =
+                regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.d1);
         }
 
         // this is a dummy field due to lack of the corresponding register
@@ -145,31 +147,35 @@ PicaFSConfig::PicaFSConfig(const Pica::Regs& regs, const Instance& instance) {
         state.lighting.lut_sp.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.sp);
 
         state.lighting.lut_fr.enable.Assign(regs.lighting.config1.disable_lut_fr == 0);
-        if(state.lighting.lut_fr.enable) {
+        if (state.lighting.lut_fr.enable) {
             state.lighting.lut_fr.abs_input.Assign(regs.lighting.abs_lut_input.disable_fr == 0);
             state.lighting.lut_fr.type.Assign(regs.lighting.lut_input.fr.Value());
-            state.lighting.lut_fr.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.fr);
+            state.lighting.lut_fr.scale =
+                regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.fr);
         }
 
         state.lighting.lut_rr.enable.Assign(regs.lighting.config1.disable_lut_rr == 0);
-        if(state.lighting.lut_rr.enable) {
+        if (state.lighting.lut_rr.enable) {
             state.lighting.lut_rr.abs_input.Assign(regs.lighting.abs_lut_input.disable_rr == 0);
             state.lighting.lut_rr.type.Assign(regs.lighting.lut_input.rr.Value());
-            state.lighting.lut_rr.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.rr);
+            state.lighting.lut_rr.scale =
+                regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.rr);
         }
 
         state.lighting.lut_rg.enable.Assign(regs.lighting.config1.disable_lut_rg == 0);
-        if(state.lighting.lut_rg.enable) {
+        if (state.lighting.lut_rg.enable) {
             state.lighting.lut_rg.abs_input.Assign(regs.lighting.abs_lut_input.disable_rg == 0);
             state.lighting.lut_rg.type.Assign(regs.lighting.lut_input.rg.Value());
-            state.lighting.lut_rg.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.rg);
+            state.lighting.lut_rg.scale =
+                regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.rg);
         }
 
         state.lighting.lut_rb.enable.Assign(regs.lighting.config1.disable_lut_rb == 0);
-        if(state.lighting.lut_rb.enable) {
+        if (state.lighting.lut_rb.enable) {
             state.lighting.lut_rb.abs_input.Assign(regs.lighting.abs_lut_input.disable_rb == 0);
             state.lighting.lut_rb.type.Assign(regs.lighting.lut_input.rb.Value());
-            state.lighting.lut_rb.scale = regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.rb);
+            state.lighting.lut_rb.scale =
+                regs.lighting.lut_scale.GetScale(regs.lighting.lut_scale.rb);
         }
 
         state.lighting.config.Assign(regs.lighting.config0.config);
@@ -181,7 +187,7 @@ PicaFSConfig::PicaFSConfig(const Pica::Regs& regs, const Instance& instance) {
         state.lighting.clamp_highlights.Assign(regs.lighting.config0.clamp_highlights != 0);
 
         state.lighting.enable_shadow.Assign(regs.lighting.config0.enable_shadow != 0);
-        if(state.lighting.enable_shadow) {
+        if (state.lighting.enable_shadow) {
             state.lighting.shadow_primary.Assign(regs.lighting.config0.shadow_primary != 0);
             state.lighting.shadow_secondary.Assign(regs.lighting.config0.shadow_secondary != 0);
             state.lighting.shadow_invert.Assign(regs.lighting.config0.shadow_invert != 0);
